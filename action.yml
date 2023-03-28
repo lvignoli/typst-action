@@ -1,0 +1,12 @@
+name: Github Action for Typst
+description: GitHub Action to compile typst documents
+author: Louis Vignoli
+inputs:
+  main_file:
+    description: The main typst file to be compiled
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.main_file }}
