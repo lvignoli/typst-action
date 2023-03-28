@@ -1,6 +1,10 @@
 name: Github Action for Typst
 description: GitHub Action to compile typst documents
 author: Louis Vignoli
+branding:
+  icon: book-open
+  color: blue
+
 inputs:
   main_file:
     description: The main typst file to be compiled
