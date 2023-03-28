@@ -1,6 +1,6 @@
 # Typst GitHub action
 
-Build Typst document using GitHub workflows.
+Build Typst documents using GitHub workflows.
 
 ## Example
 
