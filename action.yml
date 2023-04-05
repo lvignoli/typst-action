@@ -13,4 +13,4 @@ runs:
   using: docker
   image: Dockerfile
   args:
-    - ${{ inputs.main_file }}
+    - ${{ inputs.source_file }}
