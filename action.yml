@@ -6,8 +6,8 @@ branding:
   color: blue
 
 inputs:
-  main_file:
-    description: The main typst file to be compiled
+  source_file:
+    description: The typst file to be compiled. There can be multiple ones separated by new lines.
     required: true
 runs:
   using: docker
