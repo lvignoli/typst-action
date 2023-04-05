@@ -41,4 +41,16 @@ jobs:
 
 ```
 
+It is also possible to build multiple files with a newline-separated list:
+
+```yaml
+      - name: Typst
+        uses: lvignoli/typst-action@v0.1.0
+        with:
+          main_file: |
+            foo.typ
+            bar.typ
+            baz.typ
+```
+
 Repository [lvignoli/typst-action-example](https://github.com/lvignoli/typst-action-example) provides an example setup.
