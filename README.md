@@ -23,7 +23,7 @@ jobs:
       - name: Typst
         uses: lvignoli/typst-action@v0.1.0
         with:
-          main_file: main.typ
+          source_file: main.typ
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
@@ -47,7 +47,7 @@ It is also possible to build multiple files with a newline-separated list:
       - name: Typst
         uses: lvignoli/typst-action@v0.1.0
         with:
-          main_file: |
+          source_file: |
             foo.typ
             bar.typ
             baz.typ
