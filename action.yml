@@ -7,10 +7,27 @@ branding:
 
 inputs:
   source_file:
-    description: The typst file to be compiled. There can be multiple ones separated by new lines.
+    description: >
+      The typst file to be compiled. There can be multiple ones separated by new lines.
     required: true
   options:
-    description: Line separated array of global options to pass to typst.
+    description: >
+      Line separated array of global options to pass to typst. Compared to a CLI call, with space
+      separated field, each file must be on its own lines. For example, to pass an additional font
+      path using the --font-path global command, the CLI call is
+
+        typst --font-path fonts main.typ
+
+      For the action, one must use one line per argument to ensure correct parsing, in the following
+      form:
+
+        - name: Typst
+          uses: lvignoli/typst-action@main
+          with:
+            source_file: main.typ
+            options: |
+              --font-path
+              fonts
     required: false
     default: ""
 runs:
