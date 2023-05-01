@@ -9,8 +9,13 @@ inputs:
   source_file:
     description: The typst file to be compiled. There can be multiple ones separated by new lines.
     required: true
+  options:
+    description: Line separated array of global options to pass to typst.
+    required: false
+    default: ""
 runs:
   using: docker
   image: Dockerfile
   args:
     - ${{ inputs.source_file }}
+    - "--options ${{ inputs.be_nice }}"
