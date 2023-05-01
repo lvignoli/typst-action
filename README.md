@@ -67,4 +67,14 @@ jobs:
 
 ```
 
-Repository [lvignoli/typst-action-example](https://github.com/lvignoli/typst-action-example) provides an example setup.
+Repository [lvignoli/typst-action-example](https://github.com/lvignoli/typst-action-example) provides an example setup on a whole repo.
+
+## Notes
+
+- This action runs on the docker image shipped with the latest Typst.
+  As long as Typst is in v0, changes of the CLI API are to be expected, breaking the workflow.
+  I'll update regularly.
+
+- I was hasty to tag for a v1. I have now deleted it.
+  As long as Typst is not in a stable state, the action will stay in v0.
+  You should use `lvignoli/typst-action@main` in the meantime.
