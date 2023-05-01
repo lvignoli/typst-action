@@ -7,6 +7,7 @@ import sys
 source_files = sys.argv[1].splitlines()
 
 options = sys.argv[2:]
+print(options)
 if options is None:
     options = []
 
@@ -23,13 +24,11 @@ for filename in source_files:
         continue
 
     logging.info(f"Building {filename}")
-    command = ["typst", "compile", filename]
-    command.extend(options)
+    command = ["typst"] + options + ["compile", filename]
     logging.debug("Running: " + " ".join(command))
 
     result = subprocess.run(command, capture_output=True, text=True)
     try:
         result.check_returncode()
     except subprocess.CalledProcessError:
-        logging.error(f"Compiling {filename} failed with stderr:")
-        logging.error(result.stderr)
+        logging.error(f"Compiling {filename} failed with stderr: \n {result.stderr}")
