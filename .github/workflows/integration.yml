@@ -15,3 +15,5 @@ jobs:
       - name: Check existence of output file
         run: |
           test -e "tests/valid.pdf"
+          test -e "tests/math.pdf"
+      # - name: Test options
