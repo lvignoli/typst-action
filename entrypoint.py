@@ -25,8 +25,10 @@ for filename in source_files:
     print(command)
 
     result = None
+    # try:
+    result = subprocess.run(command, capture_output=True, text=True)
     try:
-        result = subprocess.run(command, capture_output=True, text=True, check=True)
+        result.check_returncode()
     except subprocess.CalledProcessError:
         logging.error(f"Compiling {filename} failed with stderr:")
         logging.error(result.stderr)
