@@ -1,4 +1,4 @@
-#document(title: "Test file", author: "Louis Vignoli")
+#set document(title: "Test file", author: "Louis Vignoli")
 
 = Test file
 
