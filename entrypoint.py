@@ -24,10 +24,9 @@ for filename in source_files:
     command.extend(options)
     print(command)
 
+    result = None
     try:
-        compilation = subprocess.run(
-            command, capture_output=True, text=True, check=True
-        )
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
     except subprocess.CalledProcessError:
         logging.error(f"Compiling {filename} failed with stderr:")
-        logging.error(compilation.stderr)
+        logging.error(result.stderr)
