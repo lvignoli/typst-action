@@ -17,7 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Typst
-        uses: lvignoli/typst-action@v0
+        uses: lvignoli/typst-action@main
         with:
           source_file: main.typ
 ```
@@ -25,9 +25,6 @@ jobs:
 ## Longer example
 
 Here we compile multiple files on each push, and all the PDF them in a tagged and timestamped release when the commit is tagged.
-
-<!-- Customize the following action to your own repo to compile `main.typ` to `main.pdf`, upload it as an action artifact, and create a timestamped release on push of a tagged commit.
-Put it in `.github/workflow/build.yaml`. -->
 
 ```yaml
 name: Build Typst document
@@ -44,7 +41,7 @@ jobs:
         uses: actions/checkout@v3
         
       - name: Typst
-        uses: lvignoli/typst-action@v0
+        uses: lvignoli/typst-action@main
         with:
           source_file: |
             first_file.typ
