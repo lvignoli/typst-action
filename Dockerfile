@@ -10,7 +10,6 @@ RUN apk add python3
 COPY \
 	LICENSE \
 	README.md \
-	entrypoint.sh \
 	entrypoint.py \
 	/root/
 
