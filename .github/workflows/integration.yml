@@ -15,8 +15,7 @@ jobs:
           options: |
             --font-path
             fonts/
-            --verbosity
-            3
+            -vv
       - name: Check existence of output file
         run: |
           test -e "tests/valid.pdf"
