@@ -6,6 +6,8 @@ import sys
 
 source_files = sys.argv[1]
 options = sys.argv[2:]
+if options is None:
+    options = []
 
 logging.basicConfig(level=logging.INFO)
 
