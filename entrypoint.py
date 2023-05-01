@@ -5,11 +5,7 @@ import sys
 
 
 source_files = sys.argv[1].splitlines()
-
-options = sys.argv[2:]
-print(options)
-if options is None:
-    options = []
+options = sys.argv[2].splitlines()
 
 logging.basicConfig(level=logging.DEBUG)
 

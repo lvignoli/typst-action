@@ -18,4 +18,4 @@ runs:
   image: Dockerfile
   args:
     - ${{ inputs.source_file }}
-    - "--options ${{ inputs.be_nice }}"
+    - ${{ inputs.be_nice }}
