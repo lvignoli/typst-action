@@ -7,17 +7,10 @@ import sys
 source_files = sys.argv[1]
 options = sys.argv[2:]
 
-print(source_files)
-print(options)
-
-
 logging.basicConfig(level=logging.INFO)
 
 version = subprocess.run(["typst", "--version"], capture_output=True, text=True).stdout
 logging.info(f"Using version {version}")
-
-source_files: list[str] = []
-options: list[str] = []
 
 for filename in source_files:
 
