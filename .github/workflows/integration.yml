@@ -13,10 +13,9 @@ jobs:
             tests/valid.typ
             tests/math.typ
           options: |
-            --font_path
+            --font-path
             fonts/
-            --verbose
-            3
+            --verbose 3
       - name: Check existence of output file
         run: |
           test -e "tests/valid.pdf"
