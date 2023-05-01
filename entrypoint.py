@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 
-source_files = sys.argv[1]
+source_files = [sys.argv[1]]
 options = sys.argv[2:]
 if options is None:
     options = []
@@ -20,7 +20,9 @@ for filename in source_files:
         continue
 
     logging.info(f"Building {filename}")
-    command = ["typst", "compile", filename].extend(options)
+    command = ["typst", "compile", filename]
+    command.extend(options)
+    print(command)
 
     try:
         compilation = subprocess.run(
