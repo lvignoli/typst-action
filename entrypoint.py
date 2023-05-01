@@ -4,17 +4,20 @@ import subprocess
 import sys
 
 
-source_files = [sys.argv[1]]
+source_files = sys.argv[1].splitlines()
+
 options = sys.argv[2:]
 if options is None:
     options = []
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 version = subprocess.run(["typst", "--version"], capture_output=True, text=True).stdout
 logging.info(f"Using version {version}")
 
 for filename in source_files:
+
+    filename = filename.strip()
 
     if filename == "":
         continue
@@ -22,10 +25,8 @@ for filename in source_files:
     logging.info(f"Building {filename}")
     command = ["typst", "compile", filename]
     command.extend(options)
-    print(command)
+    logging.debug("Running: " + " ".join(command))
 
-    result = None
-    # try:
     result = subprocess.run(command, capture_output=True, text=True)
     try:
         result.check_returncode()
