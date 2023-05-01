@@ -1,9 +1,15 @@
+"""Script to compile Typst source files."""
 import logging
 import subprocess
 import sys
 
 
-def compile(command: list[str]) -> bool:
+def compile(filename: str, options: list[str]) -> bool:
+    """Compiles a Typst file with the specified global options.
+
+    Returns True if the typst command exited with status 0, False otherwise.
+    """
+    command = ["typst"] + options + ["compile", filename]
     logging.debug("Running: " + " ".join(command))
 
     result = subprocess.run(command, capture_output=True, text=True)
@@ -16,30 +22,38 @@ def compile(command: list[str]) -> bool:
     return True
 
 
-source_files = sys.argv[1].splitlines()
-options = sys.argv[2].splitlines()
+def main():
 
-logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
 
-version = subprocess.run(["typst", "--version"], capture_output=True, text=True).stdout
-logging.info(f"Using version {version}")
+    # Parse the positional arguments, expected in the following form
+    #   1. The Typst files to compile in a line separated string
+    #   2. The global Typst CLI options, in a line separated string. It means each
+    #      whitespace separated field should be on its own line.
+    source_files = sys.argv[1].splitlines()
+    options = sys.argv[2].splitlines()
 
-success: dict[str, bool] = {}
+    version = subprocess.run(
+        ["typst", "--version"], capture_output=True, text=True
+    ).stdout
+    logging.info(f"Using version {version}")
 
-for filename in source_files:
+    success: dict[str, bool] = {}
 
-    filename = filename.strip()
+    for filename in source_files:
+        filename = filename.strip()
+        if filename == "":
+            continue
+        logging.info(f"Compiling {filename}…")
+        success[filename] = compile(filename, options)
 
-    if filename == "":
-        continue
+    # Log status of each input files.
+    for filename, status in success.items():
+        logging.info(f"{filename}: {'✔' if status else '❌'}")
 
-    logging.info(f"Building {filename}")
-    command = ["typst"] + options + ["compile", filename]
-    success[filename] = compile(command)
+    if not all(success.values()):
+        sys.exit(1)
 
 
-for filename, status in success.items():
-    logging.info(f"{filename}: {'✔' if status else '❌'}")
-
-if not all(success.values()):
-    sys.exit(1)
+if __name__ == "__main__":
+    main()
