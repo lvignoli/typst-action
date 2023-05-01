@@ -2,10 +2,32 @@
 
 Build Typst documents using GitHub workflows.
 
-## Example
+## Minimal example
 
-Customize the following action to your own repo to compile `main.typ` to `main.pdf`, upload it as an action artifact, and create a timestamped release on push of a tagged commit.
-Put it in `.github/workflow/build.yaml`.
+The following `.github/workflows/build.yaml` action compiles `main.typ` to `main.pdf` on every push.
+
+```yaml
+name: Build Typst document
+on: push
+
+jobs:
+  build_typst_documents:
+    runs-on: ubuntu-latest:
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Typst
+        uses: lvignoli/typst-action@v0
+        with:
+          source_file: main.typ
+```
+
+## Longer example
+
+Here we compile multiple files on each push, and all the PDF them in a tagged and timestamped release when the commit is tagged.
+
+<!-- Customize the following action to your own repo to compile `main.typ` to `main.pdf`, upload it as an action artifact, and create a timestamped release on push of a tagged commit.
+Put it in `.github/workflow/build.yaml`. -->
 
 ```yaml
 name: Build Typst document
@@ -20,18 +42,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        
       - name: Typst
-        uses: lvignoli/typst-action@v0.1.0
+        uses: lvignoli/typst-action@v0
         with:
-          source_file: main.typ
+          source_file: |
+            first_file.typ
+            second_file.typ
+            third_and_final_file.typ
+
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
           name: PDF
-          path: main.pdf
+          path: *.pdf
+
       - name: Get current date
         id: date
         run: echo "DATE=$(date +%Y-%m-%d-%H:%M)" >> $GITHUB_ENV
+
       - name: Release
         uses: softprops/action-gh-release@v1
         if: github.ref_type == 'tag'
@@ -39,18 +68,6 @@ jobs:
           name: "${{ github.ref_name }} — ${{ env.DATE }}"
           files: main.pdf
 
-```
-
-It is also possible to build multiple files with a newline-separated list:
-
-```yaml
-      - name: Typst
-        uses: lvignoli/typst-action@v0.1.0
-        with:
-          source_file: |
-            foo.typ
-            bar.typ
-            baz.typ
 ```
 
 Repository [lvignoli/typst-action-example](https://github.com/lvignoli/typst-action-example) provides an example setup.
