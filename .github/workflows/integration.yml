@@ -1,0 +1,15 @@
+name: Integration Test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@develop
+      - name: Self test
+        id: selftest
+        uses: lvignoli/typst-action@develop
+        with:
+          source_file: "tests/valid.typ"
+      - name: Check outputs and modified files
+        run: |
+          test -e "tests/valid.pdf"
