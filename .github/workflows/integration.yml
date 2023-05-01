@@ -13,7 +13,7 @@ jobs:
             tests/valid.typ
             tests/math.typ
           options: |
-            --font_dir fonts
+            --font_path fonts
             --verbose 3
       - name: Check existence of output file
         run: |
