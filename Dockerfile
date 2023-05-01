@@ -5,8 +5,6 @@ LABEL \
 	org.opencontainers.image.authors="Louis Vignoli <louis.vignoli@gmail.com>" \
 	org.opencontainers.image.source="https://github.com/lvignoli/typst-action"
 
-# ENV PATH="/opt/typst/bin/:${PATH}"
-
 RUN apk add python3
 
 COPY \
@@ -15,6 +13,5 @@ COPY \
 	entrypoint.sh \
 	entrypoint.py \
 	/root/
-
 
 ENTRYPOINT ["python3", "/root/entrypoint.py"]
