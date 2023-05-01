@@ -1,16 +1,16 @@
-FROM ubuntu:latest
+FROM ghcr.io/typst/typst
 
 LABEL \
-	org.opencontainers.image.title="Docker Image of typst" \
+	org.opencontainers.image.title="Typst GitHub action based on ghcr.io/typst/typst image" \
 	org.opencontainers.image.authors="Louis Vignoli <louis.vignoli@gmail.com>" \
 	org.opencontainers.image.source="https://github.com/lvignoli/typst-action"
 
-ENV PATH="/opt/typst/bin/:${PATH}"
+RUN apk add python3
 
-COPY setup.sh .
-COPY entrypoint.sh .
+COPY \
+	LICENSE \
+	README.md \
+	entrypoint.py \
+	/root/
 
-RUN /setup.sh
-RUN rm setup.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["python3", "/root/entrypoint.py"]
