@@ -1,10 +1,10 @@
 name: Integration Test
 on: [push]
 jobs:
-  build:
+  build_multiple_files_with_options:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - name: Self test
         id: selftest
         uses: lvignoli/typst-action@develop
@@ -20,3 +20,8 @@ jobs:
         run: |
           test -e "tests/valid.pdf"
           test -e "tests/math.pdf"
+      - name: upload artifacts
+        uses: actions/upload-artifacts@v3
+        with:
+          name: Output PDF files
+          path: tests/*.pdf
