@@ -20,4 +20,3 @@ jobs:
         run: |
           test -e "tests/valid.pdf"
           test -e "tests/math.pdf"
-      # - name: Test options
