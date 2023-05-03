@@ -24,7 +24,7 @@ jobs:
 
 ## Longer example
 
-Here we compile multiple files on each push, and all the PDF them in a tagged and timestamped release when the commit is tagged.
+Here we compile multiple files on each push, and publish all the PDFs in a tagged and timestamped release when the commit is tagged.
 
 ```yaml
 name: Build Typst document
