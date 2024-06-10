@@ -1,3 +1,6 @@
+> [!NOTE]
+> This was quickly hacked to support globs in the `source_file` input.
+
 # Typst GitHub action
 
 Build Typst documents using GitHub workflows.
@@ -39,7 +42,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
       - name: Typst
         uses: lvignoli/typst-action@main
         with:
