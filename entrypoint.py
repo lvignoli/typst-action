@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 
-def compile(filename: str, options: list[str], outputname: string | None) -> bool:
+def compile(filename: str, options: list[str], outputname: str | None) -> bool:
     """Compiles a Typst file with the specified global options.
 
     Returns True if the typst command exited with status 0, False otherwise.
