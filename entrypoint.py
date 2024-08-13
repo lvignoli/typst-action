@@ -4,12 +4,14 @@ import subprocess
 import sys
 
 
-def compile(filename: str, options: list[str]) -> bool:
+def compile(filename: str, options: list[str], outputname: string | None) -> bool:
     """Compiles a Typst file with the specified global options.
 
     Returns True if the typst command exited with status 0, False otherwise.
     """
     command = ["typst"] + options + ["compile", filename]
+    if outputname is not None:
+        command.append(outputname)
     logging.debug("Running: " + " ".join(command))
 
     result = subprocess.run(command, capture_output=True, text=True)
@@ -27,11 +29,14 @@ def main():
     logging.basicConfig(level=logging.INFO)
 
     # Parse the positional arguments, expected in the following form
-    #   1. The Typst files to compile in a line separated string
+    #   1. The Typst files to compile in a line separated string. Optionally To 
+    #      specify the ooutput name separate it with a : so such as: 
+    #      input.typ:output.pdf
     #   2. The global Typst CLI options, in a line separated string. It means each
     #      whitespace separated field should be on its own line.
     source_files = sys.argv[1].splitlines()
     options = sys.argv[2].splitlines()
+
 
     version = subprocess.run(
         ["typst", "--version"], capture_output=True, text=True
@@ -40,12 +45,17 @@ def main():
 
     success: dict[str, bool] = {}
 
-    for filename in source_files:
+    for filename_pair in source_files:
+        (filename, _, outputfilename) = filename_pair.partition(":")
         filename = filename.strip()
         if filename == "":
             continue
+        if outputfilename == "":
+            outputfilename = None
+        elif outputfilename is not None:
+            outputfilename = outputfilename.strip
         logging.info(f"Compiling {filename}…")
-        success[filename] = compile(filename, options)
+        success[filename] = compile(filename, options, outputfilename)
 
     # Log status of each input files.
     for filename, status in success.items():
