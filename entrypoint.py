@@ -9,7 +9,7 @@ def compile(filename: str, options: list[str], outputfilename: str | None) -> bo
 
     Returns True if the typst command exited with status 0, False otherwise.
     """
-    command = ["typst"] + options + ["compile", filename]
+    command = ["typst", "compile"] + options + [filename]
     if outputfilename is not None:
         command.append(outputfilename)
     logging.debug("Running: " + " ".join(command))
