@@ -78,3 +78,17 @@ Repository [lvignoli/typst-action-example](https://github.com/lvignoli/typst-act
 - I was hasty to tag for a v1. I have now deleted it.
   As long as Typst is not in a stable state, the action will stay in v0.
   You should use `lvignoli/typst-action@main` in the meantime.
+
+## Extra
+
+To specify the output filename use `:` in the filename to denote the name, such as:
+```
+      - name: Typst
+        uses: lvignoli/typst-action@main
+        with:
+          source_file: |
+            first_file.typ:first.pdf
+            second_file.typ
+            third_and_final_file.typ:third.pdf
+
+```
