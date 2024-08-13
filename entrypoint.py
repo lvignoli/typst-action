@@ -4,14 +4,14 @@ import subprocess
 import sys
 
 
-def compile(filename: str, options: list[str], outputname: str | None) -> bool:
+def compile(filename: str, options: list[str], outputfilename: str | None) -> bool:
     """Compiles a Typst file with the specified global options.
 
     Returns True if the typst command exited with status 0, False otherwise.
     """
     command = ["typst"] + options + ["compile", filename]
-    if outputname is not None:
-        command.append(outputname)
+    if outputfilename is not None:
+        command.append(outputfilename)
     logging.debug("Running: " + " ".join(command))
 
     result = subprocess.run(command, capture_output=True, text=True)
@@ -53,7 +53,7 @@ def main():
         if outputfilename == "":
             outputfilename = None
         elif outputfilename is not None:
-            outputfilename = outputfilename.strip
+            outputfilename = outputfilename.strip()
         logging.info(f"Compiling {filename}…")
         success[filename] = compile(filename, options, outputfilename)
 
