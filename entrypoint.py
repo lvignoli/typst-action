@@ -12,7 +12,7 @@ def compile(filename: str, options: list[str], outputfilename: str | None) -> bo
     command = ["typst", "compile"] + options + [filename]
     if outputfilename is not None:
         command.append(outputfilename)
-    logging.debug("Running: " + " ".join(command))
+    logging.info("Running: " + " ".join(command))
 
     result = subprocess.run(command, capture_output=True, text=True)
     try:
