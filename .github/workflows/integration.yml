@@ -21,7 +21,7 @@ jobs:
           test -e "tests/valid.pdf"
           test -e "tests/math.pdf"
       - name: upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Output PDF files
           path: tests/*.pdf
