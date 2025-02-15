@@ -30,9 +30,16 @@ inputs:
               fonts
     required: false
     default: ""
+  version:
+    description: >
+      The version tag of ghcr.io/typst/typst, defaults to "latest"
+    required: false
+    default: "latest"
 runs:
   using: docker
   image: Dockerfile
   args:
     - ${{ inputs.source_file }}
     - ${{ inputs.options }}
+  build-args:
+    VERSION: ${{ inputs.version }}
