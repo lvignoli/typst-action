@@ -49,7 +49,7 @@ jobs:
             third_and_final_file.typ
 
       - name: Upload PDF file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: PDF
           path: *.pdf
