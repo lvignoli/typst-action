@@ -12,6 +12,7 @@ jobs:
           source_file: |
             tests/valid.typ
             tests/math.typ
+          version: v0.12.0
           options: |
             --font-path
             fonts/
