@@ -43,6 +43,9 @@ jobs:
       - name: Typst
         uses: lvignoli/typst-action@main
         with:
+          options: |
+            --font-path
+            fonts
           source_file: |
             first_file.typ
             second_file.typ
